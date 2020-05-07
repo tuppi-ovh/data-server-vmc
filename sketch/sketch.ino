@@ -194,7 +194,9 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
         Serial.println(WiFi.localIP());
 
         /* upload temperature */
-        snprintf(buf_str, sizeof(buf_str), "http://192.168.8.100/cgi-bin/cgi_cmd.py?command=db.add.temper.104.%d&chat_id=-1", temper_x10);
+        snprintf(buf_str, sizeof(buf_str), 
+                 "http://192.168.8.100/cgi-bin/cgi_cmd.py?command=db.add.temper.%d.%d&chat_id=-1", 
+                 CONFIG_MYSENSORS_NODE_ID, temper_x10);
         Serial.println(buf_str);
         http_begin = http.begin(buf_str);
         if (http_begin) 
@@ -212,7 +214,9 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
         }
 
         /* upload humidity */
-        snprintf(buf_str, sizeof(buf_str), "http://192.168.8.100/cgi-bin/cgi_cmd.py?command=db.add.hum.104.%d&chat_id=-1", hum_x10);
+        snprintf(buf_str, sizeof(buf_str), 
+                 "http://192.168.8.100/cgi-bin/cgi_cmd.py?command=db.add.hum.%d.%d&chat_id=-1", 
+                 CONFIG_MYSENSORS_NODE_ID, hum_x10);
         Serial.println(buf_str);
         http_begin = http.begin(buf_str);
         if (http_begin) 
@@ -309,11 +313,9 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
     /* reset counter to force update */
     rtcData.force_update_counter = 0;
   }
-  else
-  {
-    /* increment counter */
-    rtcData.force_update_counter++;
-  }
+
+  /* increment counter */
+  rtcData.force_update_counter++;
 }
 
 /**
