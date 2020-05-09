@@ -1,0 +1,8 @@
+site_name: data_server_vmc
+
+markdown_extensions:
+- plantuml_markdown:
+    server: http://www.plantuml.com/plantuml
+
+nav:
+  - Continious Mecanical Ventilation: 'doc_data_server_vmc.md'
