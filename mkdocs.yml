@@ -5,4 +5,4 @@ markdown_extensions:
     server: http://www.plantuml.com/plantuml
 
 nav:
-  - Continious Mecanical Ventilation: 'doc_data_server_vmc.md'
+  - Continuous Mandatory Ventilation: 'doc_data_server_vmc.md'

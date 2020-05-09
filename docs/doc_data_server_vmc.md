@@ -1,10 +1,10 @@
 *Last update on 10/05/2020*
 
-# Continious Mecanical Ventilation
+# Continuous Mandatory Ventilation
 
 ## Introduction
 
-The idea of this project to authomize the speed regulation of Continious Mecanical Vetilation (VMC) regarding a relative humidity. 
+The idea of this project to authomize the speed regulation of Continuous Mandatory Ventilation (VMC) regarding a relative humidity. 
 
 The built module makes these things: 
 
