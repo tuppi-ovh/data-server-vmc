@@ -1,12 +1,12 @@
-*Last update on 10/05/2020*
+*Last update on 15/05/2020*
 
 # Continuous Mandatory Ventilation
 
 ## Introduction
 
-The idea of this project to authomize the speed regulation of Continuous Mandatory Ventilation (VMC) regarding a relative humidity. 
+The idea of this project is to automize the speed regulation of Continuous Mandatory Ventilation (VMC) regarding a relative humidity. 
 
-The built module makes these things: 
+The built module makes these things:
 
 - gets measurements from a humidity sensor, 
 
@@ -14,40 +14,37 @@ The built module makes these things:
 
 - sends measurements to a database via wifi,
 
-- controls the VMC relays relays regarding humidity.
+- controls the VMC relays regarding a measured humidity.
 
 
 ## Modules
 
 ```plantuml
 @startuml
+
+rectangle "7-pin Connector\n<img:https://tuppi.ovh/data_server_vmc/images/img_connector_7p.png{scale=0.5}>" as M_CONN
+
+rectangle "USB 5V" as M_USB
+
 rectangle "BOX" as M_BOX {
 
-    rectangle "433 MHz Transmitter" as M_433MHz
-    note right
-    <img:https://tuppi.ovh/data_server_vmc/images/img_433mhz_tx.png{scale=0.5}>
-    end note
+    rectangle "433 MHz Transmitter\n<img:https://tuppi.ovh/data_server_vmc/images/img_433mhz_tx.png{scale=0.5}>" as M_433MHZ
 
     rectangle "Power Supply" as M_POW
-    note right
-    NONE
-    end note 
+    
+    rectangle "LED" as M_LED
 
-    rectangle "ESP8266" as M_ESP8266
-    note right
-    <img:https://tuppi.ovh/data_server_vmc/images/img_esp8266.png{scale=0.5}>
-    end note 
+    rectangle "ESP8266\n<img:https://tuppi.ovh/data_server_vmc/images/img_esp8266.png{scale=0.2}>" as M_ESP8266
 
-    rectangle "DHT22 Sensor" as M_DHT22
-    note right
-    <img:https://tuppi.ovh/data_server_vmc/images/img_dht22.png{scale=0.5}>
-    end note
-
-    rectangle "7-pin Connector" as M_CONN
-    note right
-    <img:https://tuppi.ovh/data_server_vmc/images/img_7pin.png{scale=0.5}>
-    end note
+    rectangle "DHT22 Sensor\n<img:https://tuppi.ovh/data_server_vmc/images/img_dht22.png{scale=0.5}>" as M_DHT22
 }
+
+M_ESP8266 --> M_DHT22
+M_ESP8266 --> M_433MHZ
+M_ESP8266 --> M_LED
+M_CONN --> M_ESP8266
+M_USB --> M_POW
+
 @enduml
 ```
 
@@ -94,18 +91,35 @@ A 3-pin connector is used to connect the input voltage with the board:
 
 ### DHT22
 
+To be completed.
+
 ### ESP8266
+
+To be completed.
+
+### 7-Pin Connector
+
+Pin  &nbsp; &nbsp; &nbsp; | Name  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Wire Color
+------|------|------
+1 | GND | Black
+2 | RX | White
+3 | Reserved\* | - 
+4 | TX | Yellow
+5 | Boot by GPIO0\*\* | Green 
+6 | N.C. | -
+7 | N.C. | -
+
+*\* Reserved: Compatibility another project*  
+*\*\* Boot by GPIO0: N.C. – Flash boot, GND – UART boot*  
 
 
 ## Boards Changelog
-
-### v1.0 - Initial Version without WIFI Connection
 
 ### v2.0 - WIFI Connection & Debug Connector
 
 PCB:
 
-<img src="../images/img_pcb_v2.png">
+<img src="../images/img_pcb_v2.png" width="400"/>
 
 ### v1.1 - Low Consumption Temperature Sensor
 
@@ -118,6 +132,8 @@ Changelog vs v1.0:
 - Integrated 9V battery directly in the box.
 
 - Removed LED and 433 MHz transmitter.
+
+### v1.0 - Initial Version without WIFI Connection
 
 
 ## Source Code 
