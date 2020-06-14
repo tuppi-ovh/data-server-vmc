@@ -31,10 +31,10 @@ rectangle "BOX" as M_BOX {
     rectangle "433 MHz Transmitter\n<img:https://tuppi.ovh/data_server_vmc/images/img_433mhz_tx.png{scale=0.5}>" as M_433MHZ
 
     rectangle "Power Supply" as M_POW
-    
+
     rectangle "LED" as M_LED
 
-    rectangle "ESP8266\n<img:https://tuppi.ovh/data_server_vmc/images/img_esp8266.png{scale=0.2}>" as M_ESP8266
+    rectangle "ESP8266\n<img:https://tuppi.ovh/data_server_vmc/images/img_esp8266.png{scale=0.5}>" as M_ESP8266
 
     rectangle "DHT22 Sensor\n<img:https://tuppi.ovh/data_server_vmc/images/img_dht22.png{scale=0.5}>" as M_DHT22
 }
