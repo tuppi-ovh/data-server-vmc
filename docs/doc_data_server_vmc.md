@@ -1,4 +1,4 @@
-*Last update on 15/05/2020*
+*Last update on 20/05/2021*
 
 # Continuous Mandatory Ventilation
 
@@ -135,6 +135,35 @@ Changelog vs v1.0:
 
 ### v1.0 - Initial Version without WIFI Connection
 
+
+## Configuration File
+
+It is necessary to create a `config.h` file with this content:
+```c
+#ifndef CONFIG_H
+#define CONFIG_H
+
+/* Wifi */
+const char * CONFIG_WIFI_SSID = <your-wifi-ssid>;           
+const char * CONFIG_WIFI_PASSWORD = <your-wifi-password>;  
+
+/* DIO identification number of 26 bits, you can choose a random number */
+const uint32_t CONFIG_DIO_ID = <int>;
+
+/* deep sleep in sec after each humidity regulation */ 
+const int32_t CONFIG_SLEEP_EACH_ITER_S = 30; 
+
+/* number of deep sleeps before connection to wifi to download / upload information */
+const int32_t CONFIG_FORCE_UPDATE_ITER_NB = 60; 
+
+/* mysensors node id (see MySensors documentation for more information) */
+const int32_t CONFIG_MYSENSORS_NODE_ID = <int>;
+
+/* mysensors IP address */
+const char * CONFIG_MYSENSORS_IP = "<int>.<int>.<int>.<int>";  
+
+#endif
+```
 
 ## Source Code 
 

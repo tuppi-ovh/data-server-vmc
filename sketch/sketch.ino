@@ -1,6 +1,6 @@
 /**
  * Data Server VMC - Arduino application for VMC regulation.
- * Copyright (C) 2020 Vadim MUKHTAROV
+ * Copyright (C) 2020 tuppi-ovh
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,8 +20,7 @@
 
 /* 
  * To add ESP board:
- * 1. File > Preferences > Additional Boards URL > http://arduino.esp8266.com/staging/package_esp8266com_index.json
- * 1.1. If the link doesn't work, try https://github.com/esp8266/Arduino/releases/download/2.3.0/package_esp8266com_index.json
+ * 1. File > Preferences > Additional Boards URL > https://github.com/esp8266/Arduino/releases/download/2.3.0/package_esp8266com_index.json
  * 2. Tools > Board > Boards Manager > esp8266
  * 3. Tools > Board > Generic ESP8266 Module
  */
@@ -32,15 +31,15 @@
 #include <WiFiClient.h>
 
 /* 
- * To install DiOremote library: Sketch > Include Library > Add ZIP library "DiOremote"
+ * To install DiOremote library: 
+ * - Download library from http://charleslabs.fr/projects/20170801_DiO_remote_avec_Arduino/DiOremote.zip
+ * - Sketch > Include Library > Add ZIP library "DiOremote"
  */
 #include "DiOremote.h"
 
 /* 
  * To install DHT library: Sketch > Include Library > Manage Libraries…  
  * Enter “dht” in the search field and look through the list for “DHT sensor library by Adafruit".
- * 
- * To install Adafruit_Sensor library: Sketch > Include Library > Add ZIP library "Adafruit_Sensor-master"
  */
 #include "DHT.h"
 
@@ -195,8 +194,8 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
 
         /* upload temperature */
         snprintf(buf_str, sizeof(buf_str), 
-                 "http://192.168.8.100/cgi-bin/cgi_cmd.py?command=db.add.temper.%d.%d&chat_id=-1", 
-                 CONFIG_MYSENSORS_NODE_ID, temper_x10);
+                 "http://%s/cgi-bin/cgi_cmd.py?command=db.add.temper.%d.%d&chat_id=-1", 
+                 CONFIG_MYSENSORS_IP, CONFIG_MYSENSORS_NODE_ID, temper_x10);
         Serial.println(buf_str);
         http_begin = http.begin(buf_str);
         if (http_begin) 
@@ -215,8 +214,8 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
 
         /* upload humidity */
         snprintf(buf_str, sizeof(buf_str), 
-                 "http://192.168.8.100/cgi-bin/cgi_cmd.py?command=db.add.hum.%d.%d&chat_id=-1", 
-                 CONFIG_MYSENSORS_NODE_ID, hum_x10);
+                 "http://%s/cgi-bin/cgi_cmd.py?command=db.add.hum.%d.%d&chat_id=-1", 
+                 CONFIG_MYSENSORS_IP, CONFIG_MYSENSORS_NODE_ID, hum_x10);
         Serial.println(buf_str);
         http_begin = http.begin(buf_str);
         if (http_begin) 
@@ -234,7 +233,9 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
         }
 
         /* try to read http */
-        if (http.begin("http://192.168.8.100/cmd_vmc.txt")) 
+        snprintf(buf_str, sizeof(buf_str), 
+                 "http://%s/cmd_vmc.txt", CONFIG_MYSENSORS_IP);
+        if (http.begin(buf_str)) 
         { 
           if (http.GET() == 200)
           {
@@ -262,7 +263,7 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
               str = strtok(NULL, ",");
             }
 
-            /* update structure is checksum ok */
+            /* update structure if checksum ok */
             if (value[3] == (value[0] + value[1] + value[2]))
             {
               rtcData.hum_speed_high = value[1];
