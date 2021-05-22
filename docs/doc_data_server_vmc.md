@@ -1,4 +1,4 @@
-*Last update on 20/05/2021*
+*Last update on 22/05/2021*
 
 # Continuous Mandatory Ventilation
 
@@ -17,26 +17,28 @@ The built module makes these things:
 - controls the VMC relays regarding a measured humidity.
 
 
-## Modules
+## Hardware
+
+### Modules
 
 ```plantuml
 @startuml
 
-rectangle "7-pin Connector\n<img:https://tuppi.ovh/data_server_vmc/images/img_connector_7p.png{scale=0.5}>" as M_CONN
+rectangle "7-pin Connector\n<img:https://tuppi.ovh/data_server_vmc/sources/img_connector_7p.png{scale=0.5}>" as M_CONN
 
 rectangle "USB 5V" as M_USB
 
 rectangle "BOX" as M_BOX {
 
-    rectangle "433 MHz Transmitter\n<img:https://tuppi.ovh/data_server_vmc/images/img_433mhz_tx.png{scale=0.5}>" as M_433MHZ
+    rectangle "433 MHz Transmitter\n<img:https://tuppi.ovh/data_server_vmc/sources/img_433mhz_tx.png{scale=0.5}>" as M_433MHZ
 
     rectangle "Power Supply" as M_POW
 
     rectangle "LED" as M_LED
 
-    rectangle "ESP8266\n<img:https://tuppi.ovh/data_server_vmc/images/img_esp8266.png{scale=0.5}>" as M_ESP8266
+    rectangle "ESP8266\n<img:https://tuppi.ovh/data_server_vmc/sources/img_esp8266.png{scale=0.5}>" as M_ESP8266
 
-    rectangle "DHT22 Sensor\n<img:https://tuppi.ovh/data_server_vmc/images/img_dht22.png{scale=0.5}>" as M_DHT22
+    rectangle "DHT22 Sensor\n<img:https://tuppi.ovh/data_server_vmc/sources/img_dht22.png{scale=0.5}>" as M_DHT22
 }
 
 M_ESP8266 --> M_DHT22
@@ -112,16 +114,13 @@ Pin  &nbsp; &nbsp; &nbsp; | Name  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs
 *\* Reserved: Compatibility another project*  
 *\*\* Boot by GPIO0: N.C. – Flash boot, GND – UART boot*  
 
+### Boards Changelog
 
-## Boards Changelog
+#### v2.0 - WIFI Connection & Debug Connector
 
-### v2.0 - WIFI Connection & Debug Connector
+<img src="../sources/img_pcb_v2.png" width="400"/>
 
-PCB:
-
-<img src="../images/img_pcb_v2.png" width="400"/>
-
-### v1.1 - Low Consumption Temperature Sensor
+#### v1.1 - Low Consumption Temperature Sensor
 
 Changelog vs v1.0:
 
@@ -133,10 +132,17 @@ Changelog vs v1.0:
 
 - Removed LED and 433 MHz transmitter.
 
-### v1.0 - Initial Version without WIFI Connection
+#### v1.0 - Initial Version without WIFI Connection
 
+### Extra Information
 
-## Configuration File
+Some more information about hardware design can be found in [this document (PDF)](../sources/doc-hardware-design.pdf).
+
+--------------------------------------
+
+## Firmware
+
+### Configuration File
 
 It is necessary to create a `config.h` file with this content:
 ```c
@@ -165,7 +171,7 @@ const char * CONFIG_MYSENSORS_IP = "<int>.<int>.<int>.<int>";
 #endif
 ```
 
-## Source Code 
+### Source Code 
 
 Source code of this project: 
 
@@ -173,9 +179,19 @@ Source code of this project:
 
 - [https://github.com/tuppi-ovh/data-server-pi](https://github.com/tuppi-ovh/data-server-pi)
 
+--------------------------------------
+
+## Conclusion
+
+The board is working already for a while. Finally, it is supplied directly from a 220V USB adapter to not bother about battery connection and charging. A consumption power is about 0.3W. Below you can find how the board looks like in the real life:
+
+<img src="../sources/img_result.jpg" width="400"/>
+
+--------------------------------------
 
 ## Links
 
 - Datasheet MCP1702: [http://ww1.microchip.com/downloads/en/devicedoc/22008e.pdf](http://ww1.microchip.com/downloads/en/devicedoc/22008e.pdf)
 
+- ExpressPCB (software used for PCB design): [https://www.expresspcb.com/](https://www.expresspcb.com/)
 
