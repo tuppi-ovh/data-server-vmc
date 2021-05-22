@@ -2,6 +2,8 @@
 
 # Continuous Mandatory Ventilation
 
+--------------------------------------
+
 ## Introduction
 
 The idea of this project is to automize the speed regulation of Continuous Mandatory Ventilation (VMC) regarding a relative humidity. 
@@ -16,6 +18,7 @@ The built module makes these things:
 
 - controls the VMC relays regarding a measured humidity.
 
+--------------------------------------
 
 ## Hardware
 
@@ -118,7 +121,15 @@ Pin  &nbsp; &nbsp; &nbsp; | Name  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs
 
 #### v2.0 - WIFI Connection & Debug Connector
 
+Below you can find how looks like a pcb design of this version:
+
 <img src="../sources/img_pcb_v2.png" width="400"/>
+
+Changelog vs v1.0:
+
+- Added a 7-pin connector. 
+
+This board version is used for CMV speed regulation. It is supplied directly from a 220V USB adapter to not bother about battery connection and charging. A consumption power is about 0.3W.
 
 #### v1.1 - Low Consumption Temperature Sensor
 
@@ -132,7 +143,11 @@ Changelog vs v1.0:
 
 - Removed LED and 433 MHz transmitter.
 
+This board version is used for an autonomous temperature / humidity measurements where a power consumption becomes critical. 
+
 #### v1.0 - Initial Version without WIFI Connection
+
+Initial board version.
 
 ### Extra Information
 
@@ -183,7 +198,7 @@ Source code of this project:
 
 ## Conclusion
 
-The board is working already for a while. Finally, it is supplied directly from a 220V USB adapter to not bother about battery connection and charging. A consumption power is about 0.3W. Below you can find how the board looks like in the real life:
+The board is working already for a while. Below you can find how the board looks like in the real life:
 
 <img src="../sources/img_result.jpg" width="400"/>
 
