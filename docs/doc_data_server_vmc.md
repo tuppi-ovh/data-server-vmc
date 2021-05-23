@@ -206,7 +206,12 @@ The board is working already for a while. Below you can find how the board looks
 
 ## Links
 
-- Datasheet MCP1702: [http://ww1.microchip.com/downloads/en/devicedoc/22008e.pdf](http://ww1.microchip.com/downloads/en/devicedoc/22008e.pdf)
+- [MCP1702 Datasheet (PDF)](http://ww1.microchip.com/downloads/en/devicedoc/22008e.pdf)
 
-- ExpressPCB (software used for PCB design): [https://www.expresspcb.com/](https://www.expresspcb.com/)
+- [Arduino IDE Configuration (FRENCH)](https://www.fais-le-toi-meme.fr/fr/electronique/tutoriel/programmes-arduino-executes-sur-esp8266-arduino-ide)
 
+- [Control DiO by Arduino](http://charleslabs.fr/fr/project-Contr%C3%B4le+de+prises+DiO+avec+Arduino)
+
+- [ESP8266 Deep Sleep Mode](https://projetsdiy.fr/esp8266-test-mode-deep-sleep-reveil-wakeup-detecteur-mouvement-pir)
+
+- [ExpressPCB (software used for PCB design)](https://www.expresspcb.com)

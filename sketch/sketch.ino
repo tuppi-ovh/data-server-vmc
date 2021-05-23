@@ -80,8 +80,8 @@ const uint32_t DIO_RELAY_III_ON_CODE  = (CONFIG_DIO_ID << 6) | (DIO_GRP << 5) | 
 const uint32_t DIO_RELAY_III_OFF_CODE = (CONFIG_DIO_ID << 6) | (DIO_GRP << 5) | (DIO_OFF << 4) | (DIO_SUBID_2 << 0);
 
 /* Humidity Limits */
-const int32_t HUM_SPEED_HIGH = 80;
-const int32_t HUM_SPEED_LOW = 60;
+const int32_t HUM_SPEED_HIGH = 70;
+const int32_t HUM_SPEED_LOW = 40;
 const int32_t HUM_HYSTERESIS = 5;
 
 /* classes */
@@ -201,6 +201,7 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
         if (http_begin) 
         { 
           const int32_t http_get = http.GET();
+          if (http_get != 200)
           {
             Serial.println("wifi upload temper get error:");
             Serial.println(http_get);
@@ -221,6 +222,7 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
         if (http_begin) 
         { 
           const int32_t http_get = http.GET();
+          if (http_get != 200)
           {
             Serial.println("wifi upload hum get error:");
             Serial.println(http_get);
@@ -237,7 +239,8 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
                  "http://%s/cmd_vmc.txt", CONFIG_MYSENSORS_IP);
         if (http.begin(buf_str)) 
         { 
-          if (http.GET() == 200)
+          const int32_t http_get = http.GET();
+          if (http_get == 200)
           {
             int32_t value[4] = { -1, -1, -1, -1 };
             int32_t getSize = http.getSize();
@@ -284,6 +287,7 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
           else
           {
             Serial.println("wifi http get error");
+            Serial.println(http_get);
           }
 
           /* stop http */
@@ -314,9 +318,11 @@ void check_force_update(int32_t temper_x10, int32_t hum_x10)
     /* reset counter to force update */
     rtcData.force_update_counter = 0;
   }
-
-  /* increment counter */
-  rtcData.force_update_counter++;
+  else
+  {
+    /* increment counter */
+    rtcData.force_update_counter++;
+  }
 }
 
 /**
